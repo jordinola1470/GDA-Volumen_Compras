@@ -28,22 +28,20 @@ class Marco(tk.Frame):
             datos_registrados = [self.entry_vars_datos,self.entry_vars_genero,self.entry_vars_gda]   
             valores_registrados = []
             for datos in datos_registrados:
-                for etiqueta, entry_var in datos:
-                    if entry_var.get() != '':    
-                        print(f"{etiqueta}: {entry_var.get()}")
-                        valores_registrados.append((etiqueta,entry_var.get()))
-                    else:
-                        print('datos vacios')
-            
+                for etiqueta, entry_var in datos:    
+                    print(f"{etiqueta}: {entry_var.get()}")
+                    valores_registrados.append((etiqueta,entry_var.get()))
+
             return print(valores_registrados)
 
         
         ##BOTON REGISTRAR
 
-        self.boton_registrar = tk.Button(self.marco_izquierdo,text='Registrar',command=registro_compra)
-        self.boton_registrar.place(x=400,y=210)
+        # self.boton_registrar = tk.Button(self.marco_izquierdo,text='Registrar',height=4,command=registro_compra)
+        # self.boton_registrar.place(x=638,y=215)
 
-
+        self.boton_registrar = tk.Button(self.marco_izquierdo,text='Registrar',height=6,relief='sunken',command=registro_compra)
+        self.boton_registrar.place(x=730,y=182)
 
 
     def barra_menu(self):
