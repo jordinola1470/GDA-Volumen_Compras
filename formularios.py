@@ -6,13 +6,13 @@ def crear_datos_productor (parent):
     etiquetas = ['Nombres', 'Primer Apellido', 'Segundo Apellido','N° Documento']
     entries = ['#a5a5a5', '#a5a5a5', '#a5a5a5', '#a5a5a5']
     
-    width = 25
+    width = 40
     y = 20
     entry_vars = []
     first_entry = None
     
     for texto_etiqueta, bg_entry in zip(etiquetas, entries):
-        etiqueta = tk.Label(parent, text=texto_etiqueta)
+        etiqueta = tk.Label(parent, text=texto_etiqueta,bg='white',font=('Helvetica',9,'bold'))
         etiqueta.place(x=20, y=y)
 
         entry_var = tk.StringVar()
@@ -36,15 +36,15 @@ def crear_datos_productor (parent):
 
 def datos_genero(parent):
 
-    etiqueta_genero = tk.Label(parent,text='Género')
+    etiqueta_genero = tk.Label(parent,text='Género',bg='white',font=('Helvetica',9,'bold'))
     etiqueta_genero.place(x=20,y=140)
 
     genero_var = tk.StringVar()
     genero_var.set('masculino')
 
-    masculino_radio = tk.Radiobutton(parent,text='Masculino',variable=genero_var,value='masculino')
-    femenino_radio  = tk.Radiobutton(parent,text='Femenino',variable=genero_var,value='femenino')
-    otro_radio      = tk.Radiobutton(parent,text='Otro',variable=genero_var,value='otro')
+    masculino_radio = tk.Radiobutton(parent,text='Masculino',bg='white',variable=genero_var,value='masculino')
+    femenino_radio  = tk.Radiobutton(parent,text='Femenino',bg='white',variable=genero_var,value='femenino')
+    otro_radio      = tk.Radiobutton(parent,text='Otro',bg='white',variable=genero_var,value='otro')
     
     masculino_radio.place(x=140,y=140)
     femenino_radio.place(x=140,y=160)
@@ -57,15 +57,21 @@ def datos_genero(parent):
 '''FORMULARIO DE CHECKBOX PARA TIPO DE PRODUCTOR'''
 
 def datos_gda(parent):
-    marco_gda = tk.LabelFrame(parent,text='¿Beneficiario Cacao Conecta?',width=360,height=80)
+    marco_gda = tk.LabelFrame(parent,
+                              text='¿Beneficiario Cacao Conecta?',
+                              font=('Helvetica',9,'bold'),
+                              bg='white',
+                              borderwidth=2,
+                              relief=tk.RIDGE,
+                              width=360,height=80)
     marco_gda.place(x=20,y=210)
 
     #Booleanos de beneficiarios
     opcion_var = tk.BooleanVar()
     opcion_var.set(False)
 
-    si_radio = tk.Radiobutton(marco_gda,text='Si',variable=opcion_var,value=True)
-    no_radio = tk.Radiobutton(marco_gda,text='No',variable=opcion_var,value=False)
+    si_radio = tk.Radiobutton(marco_gda,text='Si',variable=opcion_var,bg='white',value=True)
+    no_radio = tk.Radiobutton(marco_gda,text='No',variable=opcion_var,bg='white',value=False)
 
     si_radio.place(x=80,y=5)
     no_radio.place(x=20,y=5)
@@ -82,12 +88,12 @@ def datos_gda(parent):
             etiqueta_benef_entry.place_forget()
 
     opcion_var.trace("w", mostrar_etiqueta)
-    etiqueta_benef        = tk.Label(marco_gda, text='COD Beneficiario / Finca',font=('bold'))
+    etiqueta_benef = tk.Label(marco_gda, text='COD Beneficiario / Finca',font=('Helvetica',9,'bold'),bg='white')
 
     COD_benef = tk.IntVar()
     COD_benef.set(0)
-
-    etiqueta_benef_entry  = tk.Entry(marco_gda,bg='#a5a5a5',textvariable=COD_benef) 
+    
+    etiqueta_benef_entry  = tk.Entry(marco_gda,bg='#a5a5a5',textvariable=COD_benef,width=30) 
     
     opcion_resultado = [('Beneficiario',opcion_var),('COD',COD_benef)]
 
@@ -97,14 +103,20 @@ def datos_gda(parent):
 
 def datos_volumen(parent):
 
-    marco_volumen = tk.LabelFrame(parent,text='Registro Volumen Cacao')
-    marco_volumen.place(x=385,y=10)
+    marco_volumen = tk.LabelFrame(parent,
+                                  text='Registro Volumen Cacao',
+                                  labelanchor=tk.N,
+                                  bg='white',
+                                  font=('Helvetica',9,'bold'),
+                                  borderwidth=2,
+                                  relief=tk.RIDGE)
+    marco_volumen.place(x=405,y=10)
     marco_volumen.config(pady=15)
 
     #Etiquetas Columnas
     for i,etiqueta in enumerate(['Tipos','Precio','Cantidad','Total']):
-        etiqueta_cacao = tk.Label(marco_volumen,text=etiqueta,font=('Helvetica',12,'bold'))
-        etiqueta_cacao.grid(row=1,column=0+i,sticky='w',pady=3,padx=2)
+        etiqueta_cacao = tk.Label(marco_volumen,text=etiqueta,font=('Helvetica',9,'bold'),bg='white')
+        etiqueta_cacao.grid(row=1,column=0+i,sticky='w',pady=2,padx=2)
 
     #Checkbutton's
     ## Funcion Estado Columna 1 y 2
@@ -134,7 +146,7 @@ def datos_volumen(parent):
     ## Checkbuttons-Renderizacion/Etiqueta
     etiquetas = ['Premium','Regular','Corriente']
     for i,tipo in enumerate(etiquetas):
-        tipo = tk.Checkbutton(marco_volumen, text=etiquetas[i], variable=checkbox_states[i])
+        tipo = tk.Checkbutton(marco_volumen, text=etiquetas[i], variable=checkbox_states[i],bg='white')
         tipo.grid(row=2+i,column=0,sticky='w',padx=5)
     
     ##########################################################################################################################

@@ -40,8 +40,14 @@ class Marco(tk.Frame):
         # self.boton_registrar = tk.Button(self.marco_izquierdo,text='Registrar',height=4,command=registro_compra)
         # self.boton_registrar.place(x=638,y=215)
 
-        self.boton_registrar = tk.Button(self.marco_izquierdo,text='Registrar',height=6,relief='sunken',command=registro_compra)
-        self.boton_registrar.place(x=730,y=182)
+        self.boton_registrar = tk.Button(self.marco_izquierdo,text='REGISTRAR',
+                                         font=('Helvetica',9,'bold'),
+                                         height=6,
+                                         width=15,
+                                         relief='raised',
+                                         command=registro_compra)
+        
+        self.boton_registrar.place(x=602,y=185)
 
 
     def barra_menu(self):
