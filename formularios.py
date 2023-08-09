@@ -20,7 +20,7 @@ def crear_datos_productor (parent):
         entry = tk.Entry(parent, bg=bg_entry, width=width, textvariable=entry_var)
         entry.place(x=140, y=y)
 
-        entry_vars.append(entry_var)
+        entry_vars.append((texto_etiqueta,entry_var))
 
         if not first_entry:
             first_entry = entry
@@ -50,7 +50,9 @@ def datos_genero(parent):
     femenino_radio.place(x=140,y=160)
     otro_radio.place(x=140,y=180)
 
-    return genero_var
+    genero_resultado = [('Género',genero_var)]
+
+    return genero_resultado
 
 '''FORMULARIO DE CHECKBOX PARA TIPO DE PRODUCTOR'''
 
@@ -83,11 +85,13 @@ def datos_gda(parent):
     etiqueta_benef        = tk.Label(marco_gda, text='COD Beneficiario / Finca',font=('bold'))
 
     COD_benef = tk.IntVar()
-    COD_benef.set('')
+    COD_benef.set(0)
 
     etiqueta_benef_entry  = tk.Entry(marco_gda,bg='#a5a5a5',textvariable=COD_benef) 
     
-    return opcion_var
+    opcion_resultado = [('Beneficiario',opcion_var),('COD',COD_benef)]
+
+    return opcion_resultado
 
 '''TABLA DE REGISTRO DE VOLUMEN'''
 

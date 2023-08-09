@@ -9,6 +9,7 @@ def main():
 
     marcos = Marco(root,bg='#E9573F',width=840,height=350)
     marcos.marcos_superiores()
+    marcos.barra_menu()
 
     marcos.place(x=0,y=0)
 
