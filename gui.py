@@ -1,4 +1,5 @@
 import tkinter as tk
+
 from formularios import crear_datos_productor,datos_genero,datos_gda,datos_volumen
 
 class Marco(tk.Frame):
@@ -19,6 +20,7 @@ class Marco(tk.Frame):
         self.entry_vars_genero = datos_genero(self.marco_izquierdo)
         #DATOS GDA CACAO CONECTA
         self.entry_vars_gda = datos_gda(self.marco_izquierdo)
+        
         #DATOS TABLA REGISTRO
         self.entry_vars_volumen = datos_volumen(self.marco_izquierdo)
         
@@ -41,13 +43,18 @@ class Marco(tk.Frame):
         # self.boton_registrar.place(x=638,y=215)
 
         self.boton_registrar = tk.Button(self.marco_izquierdo,text='REGISTRAR',
-                                         font=('Helvetica',9,'bold'),
-                                         height=6,
-                                         width=15,
+                                         font=('Helvetica Neue',9,'bold'),
+                                         fg='#289c8e',
+                                         height=2,
+                                         width=12,
+                                         activebackground='#289c8e',
+                                         activeforeground='white',
                                          relief='raised',
+                                         borderwidth=6,
+                                         cursor='hand2',
                                          command=registro_compra)
         
-        self.boton_registrar.place(x=602,y=185)
+        self.boton_registrar.place(x=620,y=235)
 
 
     def barra_menu(self):
@@ -55,7 +62,7 @@ class Marco(tk.Frame):
         self.barra_menu = tk.Menu(self.root)
         self.root.config(menu=self.barra_menu)
 
-        self.file_menu = tk.Menu(self.barra_menu)
+        self.file_menu = tk.Menu(self.barra_menu,tearoff=0)
         self.barra_menu.add_cascade(label='Registro',menu=self.file_menu)
 
         self.file_menu.add_command(label='Nuevo Registro')
