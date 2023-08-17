@@ -23,20 +23,31 @@ class Marco(tk.Frame):
         
         #DATOS TABLA REGISTRO
         self.entry_vars_volumen = datos_volumen(self.marco_izquierdo)
+        print(self.entry_vars_volumen)
         
         #MANIPULACION DE ENTRADAS Y DATOS
 
         def registro_compra():
             datos_registrados = [self.entry_vars_datos,self.entry_vars_genero,self.entry_vars_gda]   
-            valores_registrados = []
+
+            self.valores_registrados = []
+            
             for datos in datos_registrados:
                 for etiqueta, entry_var in datos:    
-                    print(f"{etiqueta}: {entry_var.get()}")
-                    valores_registrados.append((etiqueta,entry_var.get()))
+                    self.valores_registrados.append((etiqueta,entry_var.get()))
+           
 
-            return print(valores_registrados)
 
+
+
+            print(self.valores_registrados)
+
+            return self.valores_registrados
         
+        def alertas_datos():
+                print(self.valores_registrados[0][1])
+
+
         ##BOTON REGISTRAR
 
         # self.boton_registrar = tk.Button(self.marco_izquierdo,text='Registrar',height=4,command=registro_compra)
@@ -52,7 +63,7 @@ class Marco(tk.Frame):
                                          relief='raised',
                                          borderwidth=6,
                                          cursor='hand2',
-                                         command=registro_compra)
+                                         command=lambda : (registro_compra(),alertas_datos()))
         
         self.boton_registrar.place(x=620,y=235)
 

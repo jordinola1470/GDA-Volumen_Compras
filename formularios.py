@@ -185,9 +185,13 @@ def datos_volumen(parent):
     def actualizar_totales(index):
         precio = entries_lista[index].get()
         cantidad = entries_listaCantidad[index].get()
-        total = float(precio) * float(cantidad)
-        entries_listaTotal[index].delete(0, tk.END)
-        entries_listaTotal[index].insert(0, total)
+
+        try:
+            total = float(precio) * float(cantidad)
+            entries_listaTotal[index].delete(0, tk.END)
+            entries_listaTotal[index].insert(0, total)
+        except:
+            pass
 
     ## Trace - Precio/Cantidad
     for i in range(len(entries_lista)):
@@ -210,4 +214,10 @@ def datos_volumen(parent):
         tipo.grid(row=2+i,column=3,sticky='w',padx=5)
 
     
-    return checkbox_states,valores_entry_precio,valores_entry_cantidad
+
+    #Retorno de los valores ingresados en todo el bloque de widgets
+    tipo_cacao_elegido = [('premium',var_premium),('regular',var_regular),('corriente',var_corriente)]
+    
+
+
+    return tipo_cacao_elegido,valores_entry_precio,valores_entry_cantidad
