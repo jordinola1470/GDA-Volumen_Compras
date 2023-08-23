@@ -1,4 +1,6 @@
 import tkinter as tk
+import pandas as pd
+import os
 
 from formularios_datos import crear_datos_productor,datos_genero,datos_gda
 from formularios_volumen import datos_volumen
@@ -26,7 +28,7 @@ class Marco(tk.Frame):
         #DATOS VOLUMEN VENTAS
         self.entry_vars_volumen = datos_volumen(self.marco_izquierdo)
         
-
+    #-----------------------------------------------------------------------------------------------------------
 
         #MANIPULACION DE ENTRADAS Y DATOS
         def registro_compra():
@@ -46,15 +48,28 @@ class Marco(tk.Frame):
                 self.volumen_precios.append((key,value.get()))
 
 
-            #RESULTADOS
-            resultados = self.valores_registrados + self.volumen_precios
+            #RESULTADOS EN FORMA DE DICTIONARIO PARA LA CREACION DE UN DATAFRAME
+            resultados = dict(self.valores_registrados + self.volumen_precios)
+
+            matriz_resultados = pd.DataFrame([resultados])
+
+            try:
+
+
+                nombre = '/Users/josealonsoordinolaaucca/Documents/Documentos/Programacion/Proyecto GDA - Registro Compra Cacao/prueba.xlsx'
+                matriz_resultados.to_excel(nombre,index=False)
+
+            except:
+                pass   
+
                 
-            return print(resultados)
+            return print('EJECUTADO')
         
         # def alertas_datos():
         #     print(self.valores_registrados[0][1])
 
 
+        #-------------------------------------------------------------------------------------------
         ##BOTON REGISTRAR
 
         self.boton_registrar = tk.Button(self.marco_izquierdo,text='REGISTRAR',
