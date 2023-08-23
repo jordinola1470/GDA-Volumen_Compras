@@ -16,7 +16,7 @@ def datos_volumen(parent):
     marco_volumen.config(padx=5,pady=15)
 
     #Nombre de las columnas 
-    for i,etiqueta in enumerate(['TIPO','PRECIO','CANTIDAD','TOTAL']):
+    for i,etiqueta in enumerate(['TIPO','PRECIO','CANTIDAD (KG)','TOTAL']):
         etiqueta_cacao = tk.Label(marco_volumen,text=etiqueta,font=('Arial',10,'bold'),fg='#0D3B66',bg='white')
         etiqueta_cacao.grid(row=1,column=0+i,sticky='w',padx=2)
 
@@ -46,7 +46,7 @@ def datos_volumen(parent):
         etiquetas = multiplicar(resultado_volumen_valores)
 
         for i,tipo in enumerate(etiquetas):
-            label = tk.Label(marco_volumen,text=etiquetas[i])
+            label = tk.Label(marco_volumen,text=etiquetas[i],font=('Arial',10,'bold'),fg='#0D3B66',bg='white')
             label.grid(row=2+i,column=3,sticky='w',padx=5) 
 
 

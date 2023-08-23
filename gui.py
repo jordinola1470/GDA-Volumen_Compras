@@ -4,6 +4,7 @@ import os
 
 from datetime import date
 from openpyxl import load_workbook
+from tkinter import messagebox
 
 from formularios_datos import crear_datos_productor,datos_genero,datos_gda
 from formularios_volumen import datos_volumen
@@ -59,8 +60,11 @@ class Marco(tk.Frame):
 
             fecha  = (date.today()).strftime('%d%m%Y')
             nombre = str(f'matriz_registros_{fecha}.xlsx')
-            nombre_ruta = str('/Users/josealonsoordinolaaucca/Documents/Documentos/Programacion/Proyecto GDA - Registro Compra Cacao/' + nombre)
-            
+
+            directorio_actual = os.getcwd()
+            directorio_madre  = os.path.dirname(directorio_actual)
+            nombre_ruta = os.path.join(directorio_madre,nombre)
+        
             if os.path.exists(nombre_ruta):
                 workbook  = load_workbook(nombre_ruta)
                 worksheet = workbook.active
@@ -76,13 +80,19 @@ class Marco(tk.Frame):
                 matriz_resultados.to_excel(nombre_ruta,index=False) 
        
             return print('EJECUTADO')
-        
-       
+
+        #-------------------------------------------------------------------------------------------
+        ##AVISO
+        def aviso_seguridad():
+            resultado = messagebox.askokcancel('Aviso','¿Estás seguro de realizar el registro?')
+            if resultado:
+                registro_compra()
+                messagebox.showinfo('Exito','La compra se ha registrado correctamente')
 
 
         #-------------------------------------------------------------------------------------------
+        
         ##BOTON REGISTRAR
-
         self.boton_registrar = tk.Button(self.marco_izquierdo,text='REGISTRAR',
                                          font=('Helvetica Neue',9,'bold'),
                                          fg='#289c8e',
@@ -93,12 +103,13 @@ class Marco(tk.Frame):
                                          relief='raised',
                                          borderwidth=6,
                                          cursor='hand2',
-                                         command=lambda : (registro_compra())) 
+                                         command=lambda : ((aviso_seguridad()))) 
                                         #  command=lambda : (registro_compra(),alertas_datos()))
         
         self.boton_registrar.place(x=620,y=235)
 
-
+    #--------------------------------------------------------------------------------------------------
+    
     def barra_menu(self):
 
         self.barra_menu = tk.Menu(self.root)
@@ -107,11 +118,6 @@ class Marco(tk.Frame):
         self.file_menu = tk.Menu(self.barra_menu,tearoff=0)
         self.barra_menu.add_cascade(label='Registro',menu=self.file_menu)
 
-        # self.file_menu.add_command(label='Nuevo Registro')
-        # self.file_menu.add_command(label='Eliminar Registros')
         self.file_menu.add_command(label='Salir',command=self.root.quit)
 
-        
-
-
-    # def marcos_inferiores(self):    
+          
