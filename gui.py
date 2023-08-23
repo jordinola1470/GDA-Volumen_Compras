@@ -2,6 +2,9 @@ import tkinter as tk
 import pandas as pd
 import os
 
+from datetime import date
+from openpyxl import load_workbook
+
 from formularios_datos import crear_datos_productor,datos_genero,datos_gda
 from formularios_volumen import datos_volumen
 
@@ -44,29 +47,37 @@ class Marco(tk.Frame):
             #PRECIOS/CANTIDAD
             self.volumen_precios = []
             for key, value in datos_volumen_registrados:
-
                 self.volumen_precios.append((key,value.get()))
 
+            #---------------------------------------------------------------------------------
 
             #RESULTADOS EN FORMA DE DICTIONARIO PARA LA CREACION DE UN DATAFRAME
             resultados = dict(self.valores_registrados + self.volumen_precios)
-
             matriz_resultados = pd.DataFrame([resultados])
 
-            try:
+            #CREACION DEL ARCHIVO EXCEL EN LA RUTA ESPECIFICA / INGRESO DE NUEVAS CELDAS   
 
+            fecha  = (date.today()).strftime('%d%m%Y')
+            nombre = str(f'matriz_registros_{fecha}.xlsx')
+            nombre_ruta = str('/Users/josealonsoordinolaaucca/Documents/Documentos/Programacion/Proyecto GDA - Registro Compra Cacao/' + nombre)
+            
+            if os.path.exists(nombre_ruta):
+                workbook  = load_workbook(nombre_ruta)
+                worksheet = workbook.active
 
-                nombre = '/Users/josealonsoordinolaaucca/Documents/Documentos/Programacion/Proyecto GDA - Registro Compra Cacao/prueba.xlsx'
-                matriz_resultados.to_excel(nombre,index=False)
+                nueva_fila = []
+                for valores in resultados.values():
+                    nueva_fila.append(valores)
 
-            except:
-                pass   
-
+                worksheet.append(nueva_fila)
+                workbook.save(nombre_ruta)
                 
+            else:
+                matriz_resultados.to_excel(nombre_ruta,index=False) 
+       
             return print('EJECUTADO')
         
-        # def alertas_datos():
-        #     print(self.valores_registrados[0][1])
+       
 
 
         #-------------------------------------------------------------------------------------------
