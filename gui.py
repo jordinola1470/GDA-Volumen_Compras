@@ -58,28 +58,31 @@ class Marco(tk.Frame):
 
             #CREACION DEL ARCHIVO EXCEL EN LA RUTA ESPECIFICA / INGRESO DE NUEVAS CELDAS   
 
-            fecha  = (date.today()).strftime('%d%m%Y')
-            nombre = str(f'matriz_registros_{fecha}.xlsx')
+            fecha        = (date.today()).strftime('%d%m%Y')
+            nombre_excel = str(f'matriz_registros_{fecha}.xlsx')
 
             directorio_actual = os.getcwd()
-            directorio_madre  = os.path.dirname(directorio_actual)
-            nombre_ruta = os.path.join(directorio_madre,nombre)
-        
-            if os.path.exists(nombre_ruta):
-                workbook  = load_workbook(nombre_ruta)
-                worksheet = workbook.active
+            nombre = os.path.join(directorio_actual,nombre_excel)
+            
+            try:
+                if os.path.exists(nombre):
+                    workbook  = load_workbook(nombre)
+                    worksheet = workbook.active
 
-                nueva_fila = []
-                for valores in resultados.values():
-                    nueva_fila.append(valores)
+                    nueva_fila = []
+                    for valores in resultados.values():
+                        nueva_fila.append(valores)
 
-                worksheet.append(nueva_fila)
-                workbook.save(nombre_ruta)
-                
-            else:
-                matriz_resultados.to_excel(nombre_ruta,index=False) 
-       
-            return print('EJECUTADO')
+                    worksheet.append(nueva_fila)
+                    workbook.save(nombre)
+                    
+                else:
+                    matriz_resultados.to_excel(nombre,index=False) 
+            except:
+
+                print('NO SE CREO EXCEL')
+
+            return print(matriz_resultados)
 
         #-------------------------------------------------------------------------------------------
         ##AVISO
